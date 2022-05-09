@@ -25,12 +25,12 @@ function handleDoneOrDelete(event){
     } else if(event.target.id === "done"){
         let element = event.target.parentElement;
 
-        if (element.style.textDecoration == 'line-through'){
-            element.style.textDecoration = 'none';
+        if (element.firstElementChild.style.textDecoration == 'line-through'){
+            element.firstElementChild.style.textDecoration = 'none';
             event.target.textContent = "Done"
         }
         else{
-            element.style.textDecoration = 'line-through';
+            element.firstElementChild.style.textDecoration = 'line-through';
             event.target.textContent = "Undo"
         }
         
