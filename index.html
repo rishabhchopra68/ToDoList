@@ -4,19 +4,23 @@
         <title>
             "To Do List"
         </title>
+        <link rel="stylesheet" href="./index.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
-        <h1>To Do List</h1>
-        <div>
+        <h1 id="page-title">To Do List</h1>
+        <div class="form-container">
             <form id="add_task_form">
-                <label id="add_task" style="font-size: x-large;">Add task: </label>
-                <input id="add task">
-                <button type="submit">Add</button>
+                <input id="add_task_input" class="add_task_input" placeholder="New Task ..." required>
+                <button id="add_task_button" class="add_task_button" type="submit">Create Task</button>
             </form>
+        </div>
+        <div class="list-container">
             <ul class="list">
-
+    
             </ul>
         </div>
+
         <script src="./script.js"></script>
     </body>
 </html>

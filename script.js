@@ -1,42 +1,66 @@
+const tasks = JSON.parse(localStorage.getItem('tasks'));
+
+const createListItem = (item) => {
+    const listItem = document.createElement('li');
+    listItem.classList.add("listitem")
+    listItem.innerHTML = `
+        <span class="task-name">${item}</span>
+        <div class="task-button-container">
+            <button id="done" class="done-button" onclick="handleDoneOrDelete(event)">Done</button>
+            <button id="delete" class="delete-button" onclick="handleDoneOrDelete(event)">Remove</button>
+        </div>
+    `
+    return listItem;
+}
+
+tasks && tasks.map((task) => {
+    console.log("task")
+    document.querySelector('ul').append(createListItem(task));
+}
+);
+
 function handleFormSubmit(event){
     event.preventDefault();
-    // console.log(event);
+    const currentTasks = JSON.parse(localStorage.getItem('tasks'));
     const list = document.querySelector('ul');
     const input = document.querySelector('input');
 
     // create html and append to ul list
-    const listItem = document.createElement('li');
-    listItem.classList.add("listitem")
-    listItem.innerHTML = `
-        <span style="width: 100%">${input.value}</span>
-        <button id="done"  style="background-color: #4CAF50">Done</button>
-        <button id="delete"  style="background-color: #FF0000">Delete</button>
-    `
-    list.append(listItem);
-    input.value=''
+    if(input.value)
+    {
+        if(currentTasks){
+            localStorage.setItem('tasks', JSON.stringify([...currentTasks, input.value]));
+        } else{
+            localStorage.setItem('tasks', JSON.stringify([input.value]));
+        }
+        list.append(createListItem(input.value));
+        input.value=''
+    }
 }
 
 function handleDoneOrDelete(event){
-    console.log(event)
+    
+    let element = event.target.parentElement.parentElement;
+    let taskName = element.firstElementChild.innerText;
+    const currentTasks = JSON.parse(localStorage.getItem('tasks')).filter((task) => task !== taskName);
+    console.log(taskName, currentTasks);
     if(event.target.id === "delete"){
-        let element = event.target.parentElement;
+        localStorage.setItem('tasks', JSON.stringify(currentTasks));
         element.remove();
 
     } else if(event.target.id === "done"){
-        let element = event.target.parentElement;
-
+        console.log(event.target.innerHTML)
+        let element = event.target.parentElement.parentElement;
         if (element.firstElementChild.style.textDecoration == 'line-through'){
             element.firstElementChild.style.textDecoration = 'none';
-            event.target.textContent = "Done"
+            event.target.innerHTML = "Done";
         }
         else{
             element.firstElementChild.style.textDecoration = 'line-through';
-            event.target.textContent = "Undo"
+            event.target.innerHTML = "Undo";
         }
         
     }
 }
 
 document.querySelector("form").addEventListener("submit",handleFormSubmit);
-
-document.querySelector("ul").addEventListener("click",handleDoneOrDelete);
