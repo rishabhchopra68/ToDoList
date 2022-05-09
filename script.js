@@ -14,7 +14,6 @@ const createListItem = (item) => {
 }
 
 tasks && tasks.map((task) => {
-    console.log("task")
     document.querySelector('ul').append(createListItem(task));
 }
 );
@@ -39,17 +38,14 @@ function handleFormSubmit(event){
 }
 
 function handleDoneOrDelete(event){
-    
     let element = event.target.parentElement.parentElement;
     let taskName = element.firstElementChild.innerText;
     const currentTasks = JSON.parse(localStorage.getItem('tasks')).filter((task) => task !== taskName);
-    console.log(taskName, currentTasks);
     if(event.target.id === "delete"){
         localStorage.setItem('tasks', JSON.stringify(currentTasks));
         element.remove();
 
     } else if(event.target.id === "done"){
-        console.log(event.target.innerHTML)
         let element = event.target.parentElement.parentElement;
         if (element.firstElementChild.style.textDecoration == 'line-through'){
             element.firstElementChild.style.textDecoration = 'none';
@@ -59,7 +55,6 @@ function handleDoneOrDelete(event){
             element.firstElementChild.style.textDecoration = 'line-through';
             event.target.innerHTML = "Undo";
         }
-        
     }
 }
 

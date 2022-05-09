@@ -1,39 +1,50 @@
+.app-container {
+    background-color: whitesmoke;
+    height: 100vh;
+}
 .listitem {
     padding: 5px;
     margin-bottom: 2px;
 }
 
 .list {
+    background-color: white;
     margin-top: 30px;
     width: max-content;
-    list-style: none;
+    list-style: circle;
     margin-left: 0px;
 }
 
 .task-name {
+    margin-right: 20px;
     font-family: cursive;
 }
 
 .add_task_input {
+    margin-right: 50px;
     font-family: monospace;
-    min-width: 300px;
+    min-width: 250px;
     border: 2px solid;
     padding: 5px;
     border-radius: 5px;
 }
 
+.add_task_input:focus {
+    position: relative;
+    transform: scale(1.1);
+}
+
 .add_task_button {
-    margin-left: 5px;
     font-weight: bold;
     font-family: cursive;
     padding: 5px;
     min-width: 80px;
-    background-color: rgba(23,67,88,0.5);
+    background-color: rgba(23,67,88,0.3);
     border-radius: 5px;
 }
 
 .add_task_button:hover{
-    background-color: rgba(23,67,88,0.6);
+    background-color: rgba(23,67,88,0.5);
     transform: scale(1.05);
 }
 
@@ -45,7 +56,7 @@
     padding: 5px;
     min-width: 30px;
     background-color: #4CAF50;
-    opacity: 0.9;
+    opacity: 0.85;
     border-radius: 5px;
 }
 
@@ -62,7 +73,7 @@
     padding: 5px;
     min-width: 80px;
     background-color: #FF0000;
-    opacity: 0.9;
+    opacity: 0.85;
     border-radius: 5px;
 }
 
@@ -72,6 +83,8 @@
 }
 
 #page-title {
+    background-color: white;
+    margin-top: 0;
     display: flex;
     justify-content: center;
     font-family: cursive;
@@ -93,3 +106,8 @@
     float: right;
     justify-content: flex-end;
 }
+
+::-webkit-input-placeholder {
+    font-weight: bold;
+}
+
