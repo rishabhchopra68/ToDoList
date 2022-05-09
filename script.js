@@ -27,12 +27,17 @@ function handleFormSubmit(event){
     // create html and append to ul list
     if(input.value)
     {
-        if(currentTasks){
-            localStorage.setItem('tasks', JSON.stringify([...currentTasks, input.value]));
-        } else{
-            localStorage.setItem('tasks', JSON.stringify([input.value]));
+        const trimmedInput = input.value.trim();
+        if(currentTasks.indexOf(trimmedInput) !== -1){
+            alert("task already exists");
+            return;
         }
-        list.append(createListItem(input.value));
+        if(currentTasks){
+            localStorage.setItem('tasks', JSON.stringify([...currentTasks, trimmedInput]));
+        } else{
+            localStorage.setItem('tasks', JSON.stringify([trimmedInput]));
+        }
+        list.append(createListItem(trimmedInput));
         input.value=''
     }
 }
@@ -40,7 +45,9 @@ function handleFormSubmit(event){
 function handleDoneOrDelete(event){
     let element = event.target.parentElement.parentElement;
     let taskName = element.firstElementChild.innerText;
-    const currentTasks = JSON.parse(localStorage.getItem('tasks')).filter((task) => task !== taskName);
+    console.log(JSON.parse(localStorage.getItem('tasks')));
+    const currentTasks = JSON.parse(localStorage.getItem('tasks')).filter((task) => task.trim() !== taskName.trim());
+    console.log(currentTasks)
     if(event.target.id === "delete"){
         localStorage.setItem('tasks', JSON.stringify(currentTasks));
         element.remove();

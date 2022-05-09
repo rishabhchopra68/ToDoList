@@ -5,14 +5,21 @@
 .listitem {
     padding: 5px;
     margin-bottom: 2px;
+    margin-left: 0px;
+    display: flow-root;
+    min-height: max-content;
 }
 
 .list {
+    border: 2px solid lightgrey;
+    overflow-y: auto;
+
+    max-height: 70vh;
     background-color: white;
     margin-top: 30px;
-    width: max-content;
-    list-style: circle;
-    margin-left: 0px;
+    width: 50%;
+    list-style: none;
+    padding: 10px;
 }
 
 .task-name {
@@ -23,7 +30,7 @@
 .add_task_input {
     margin-right: 50px;
     font-family: monospace;
-    min-width: 250px;
+    min-width: 350px;
     border: 2px solid;
     padding: 5px;
     border-radius: 5px;
@@ -110,4 +117,16 @@
 ::-webkit-input-placeholder {
     font-weight: bold;
 }
+
+::-webkit-scrollbar {
+    border-radius: 15px;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color: lightgrey;
+    outline: 1px solid slategrey;
+  }
 
