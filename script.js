@@ -1,5 +1,5 @@
 const tasks = JSON.parse(localStorage.getItem('tasks'));
-if(tasks.length === 0){
+if(tasks && tasks.length === 0){
     document.getElementsByClassName("list-container")[0].classList.add("hide")
 }
 
