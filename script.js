@@ -1,4 +1,7 @@
 const tasks = JSON.parse(localStorage.getItem('tasks'));
+if(tasks.length === 0){
+    document.getElementsByClassName("list-container")[0].classList.add("hide")
+}
 
 const createListItem = (item) => {
     const listItem = document.createElement('li');
@@ -28,11 +31,13 @@ function handleFormSubmit(event){
     if(input.value)
     {
         const trimmedInput = input.value.trim();
-        if(currentTasks.indexOf(trimmedInput) !== -1){
-            alert("task already exists");
-            return;
-        }
+        
         if(currentTasks){
+            if(currentTasks.indexOf(trimmedInput) !== -1){
+                alert("task already exists");
+                return;
+            }
+            document.getElementsByClassName("list-container")[0].classList.remove("hide")
             localStorage.setItem('tasks', JSON.stringify([...currentTasks, trimmedInput]));
         } else{
             localStorage.setItem('tasks', JSON.stringify([trimmedInput]));
@@ -45,11 +50,12 @@ function handleFormSubmit(event){
 function handleDoneOrDelete(event){
     let element = event.target.parentElement.parentElement;
     let taskName = element.firstElementChild.innerText;
-    console.log(JSON.parse(localStorage.getItem('tasks')));
     const currentTasks = JSON.parse(localStorage.getItem('tasks')).filter((task) => task.trim() !== taskName.trim());
-    console.log(currentTasks)
     if(event.target.id === "delete"){
         localStorage.setItem('tasks', JSON.stringify(currentTasks));
+        if(JSON.parse(localStorage.getItem('tasks')).length === 0){
+            document.getElementsByClassName("list-container")[0].classList.add("hide")
+        }
         element.remove();
 
     } else if(event.target.id === "done"){
